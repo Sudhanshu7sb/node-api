@@ -16,7 +16,9 @@ app.use((req,res,next) => {
 })
 
 // route 
-
+app.use("/",(req,res,next) => {
+    res.json({message:"hi backend"})
+})
 app.use("/api/user",userRoutes);
 
 
