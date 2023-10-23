@@ -1,10 +1,18 @@
 const dotenv = require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const userRoutes = require("./routes/user");
 
 
 const app = express();
+app.use(cors(
+    {
+        origin: ["https://node-api-ruddy.vercel.app/"],
+        methods: ['GET', 'POST'],
+        credentials:true
+    }
+));
 app.use(express.json());
 
 
@@ -16,9 +24,9 @@ app.use((req,res,next) => {
 })
 
 // route 
-app.use("/",(req,res) => {
+app.use("/",(req,res,next) => {
     res.json({message:"hi backend"})
-    // next();
+    next();
 })
 app.use("/api/user",userRoutes);
 
